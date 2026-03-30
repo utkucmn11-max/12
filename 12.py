@@ -1,113 +1,102 @@
 import streamlit as st
 import time
 
-# 1. SAYFA AYARLARI (Hata almamak için her zaman en üstte!)
+# --- 1. SAYFA AYARLARI (BU HER ZAMAN İLK SATIRDA OLMALIDIR) ---
 st.set_page_config(
-    page_title="Bizim Dünyamız ❤️",
-    page_icon="🌸",
+    page_title="Bizim Hikayemiz ❤️",
+    page_icon="🌹",
     layout="centered"
 )
 
-# 2. ÖZEL TASARIM (CSS)
+# --- 2. GÖRSEL ÖZELLEŞTİRME (CSS) ---
 st.markdown("""
     <style>
-    /* Arka plan rengi ve genel font */
+    /* Arka plan gradyanı */
     .stApp {
-        background-color: #fffafb;
+        background: linear-gradient(to right, #ffafbd, #ffc3a0);
     }
     
-    /* Başlık stili */
-    .ana-baslik {
-        font-family: 'Georgia', serif;
-        color: #c2185b;
+    /* Kart yapısı */
+    .ask-kart {
+        background-color: rgba(255, 255, 255, 0.85);
+        padding: 25px;
+        border-radius: 20px;
+        border: 1px solid #ff4b4b;
+        box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+        color: #333;
         text-align: center;
-        font-size: 3rem;
-        font-weight: bold;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
 
-    /* Kart tasarımı */
-    .not-kart {
-        background: white;
-        padding: 20px;
-        border-radius: 15px;
-        border-left: 5px solid #ff4081;
-        box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
-        margin-bottom: 15px;
-    }
-    
-    /* Yan menü (Sidebar) */
-    [data-testid="stSidebar"] {
-        background-color: #fce4ec;
+    /* Başlık stili */
+    .baslik {
+        color: #d81b60;
+        font-family: 'Trebuchet MS', sans-serif;
+        font-size: 40px;
+        font-weight: bold;
     }
     </style>
     """, unsafe_allow_index=True)
 
-# 3. YAN MENÜ NAVİGASYON
+# --- 3. YAN MENÜ ---
 with st.sidebar:
-    st.title("💖 Menü")
-    sayfa = st.radio("Gitmek istediğin yer:", ["Giriş", "Bizim Hikayemiz", "Neden Sen?", "Küçük Bir Sürpriz"])
+    st.markdown("### ❤️ Özel Menü")
+    sayfa = st.radio("Nereye Bakmak İstersin?", ["Ana Sayfa", "Anılarımız", "Neden Sen?", "Sürpriz ✨"])
     st.markdown("---")
-    st.write("Her anımız, en güzel hatıramız... ✨")
+    st.write("Sana olan sevgim, her satır kodda gizli.")
 
-# 4. SAYFA İÇERİKLERİ
-if sayfa == "Giriş":
-    st.markdown('<h1 class="ana-baslik">Hoş Geldin Her Şeyim... ❤️</h1>', unsafe_allow_index=True)
+# --- 4. SAYFA İÇERİKLERİ ---
+
+if sayfa == "Ana Sayfa":
+    st.markdown('<div class="ask-kart"><h1 class="baslik">Hoş Geldin Her Şeyim ❤️</h1>', unsafe_allow_index=True)
+    st.write("Bu site, sadece senin gülüşün gibi güzel anları saklamak için yapıldı.")
+    st.write("Sol taraftaki menüden dünyamızı keşfedebilirsin.")
+    st.markdown('</div>', unsafe_allow_index=True)
     
-    col1, col2, col3 = st.columns([1,2,1])
+    # Küçük bir karşılama balonu
+    if st.button("Buraya Tıkla"):
+        st.balloons()
+
+elif sayfa == "Anılarımız":
+    st.markdown('<h1 class="baslik" style="text-align:center;">📸 Hatıralar</h1>', unsafe_allow_index=True)
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.info("📅 **Tanıştığımız Gün**\n\nHayatımın en şanslı günüydü.")
     with col2:
-        # Buraya kendi profil fotoğrafını veya ortak bir fotoğrafı koyabilirsin
-        st.image("https://cdn-icons-png.flaticon.com/512/4359/4359295.png", width=200)
+        st.success("🍦 **İlk Randevu**\n\nZamanın durmasını istediğim o an.")
     
-    st.markdown("""
-    <div class="not-kart">
-        <p style="text-align: center; font-size: 1.2rem; color: #555;">
-            "Sıradan bir günün, seninle tanışınca nasıl bir mucizeye dönüştüğünü unutamam. 
-            Bu site, bizim küçük dünyamızın dijital bir arşivi olsun istedim."
-        </p>
-    </div>
-    """, unsafe_allow_index=True)
-
-elif sayfa == "Bizim Hikayemiz":
-    st.markdown('<h1 class="ana-baslik">Zaman Tünelimiz ⏳</h1>', unsafe_allow_index=True)
-    
-    # Anılar listesi
-    anilar = [
-        ("📅 İlk Karşılaşma", "O gün dünya benim için sanki yeniden dönmeye başladı."),
-        ("💬 İlk Mesaj", "Heyecandan ellerimin titrediği o anı hala hatırlıyorum."),
-        ("🍦 İlk Buluşma", "En sevdiğimiz o yerde, saatlerce hiç susmadan konuşmuştuk.")
-    ]
-    
-    for baslik, detay in anilar:
-        with st.expander(baslik):
-            st.write(detay)
-            # st.image("anilar/resim1.jpg") # Kendi resimlerini buraya ekle
+    st.warning("✨ *Daha nice güzel anılara beraber yürümek dileğiyle...*")
 
 elif sayfa == "Neden Sen?":
-    st.markdown('<h1 class="ana-baslik">Çünkü... ✨</h1>', unsafe_allow_index=True)
+    st.markdown('<h1 class="baslik" style="text-align:center;">Neden Sen? ❤️</h1>', unsafe_allow_index=True)
     
     sebepler = [
-        "En kötü günümde bile beni güldürebildiğin için.",
-        "Gözlerinin içine baktığımda huzuru bulduğum için.",
-        "Sadece yanımda olman bile her şeyi güzelleştirdiği için.",
-        "Hayallerime ortak olduğun için."
+        "Dünyadaki en güzel gülüşe sahip olduğun için.",
+        "Sadece bakışlarınla bile beni sakinleştirebildiğin için.",
+        "Beni her halimle sevdiğin ve desteklediğin için.",
+        "Seninle her şeyin çok daha kolay ve güzel olduğu için."
     ]
     
     for s in sebepler:
-        st.markdown(f'<div class="not-kart">🌟 {s}</div>', unsafe_allow_index=True)
+        st.markdown(f'<div class="ask-kart">🌟 {s}</div>', unsafe_allow_index=True)
 
-elif sayfa == "Küçük Bir Sürpriz":
-    st.markdown('<h1 class="ana-baslik">Sana Bir Mesajım Var 💌</h1>', unsafe_allow_index=True)
+elif sayfa == "Sürpriz ✨":
+    st.markdown('<h1 class="baslik" style="text-align:center;">Sana Bir Mesaj 💌</h1>', unsafe_allow_index=True)
     
-    st.write("Aşağıdaki butona basmanı bekliyorum...")
+    st.write("Aşağıdaki butona bas ve bekle...")
     
-    if st.button("Bana Tıkla! ✨"):
+    if st.button("Seni Seviyorum Çünkü..."):
+        with st.spinner('Kalbimden geçenler yükleniyor...'):
+            time.sleep(2)
         st.balloons()
         st.snow()
-        st.success("Seni her geçen gün daha çok seviyorum! ❤️")
-        st.write("---")
-        st.info("Bu site her zaman burada kalacak, tıpkı sana olan sevgim gibi.")
+        st.markdown("""
+            <div style="background-color: white; padding: 30px; border-radius: 50%; border: 2px solid red;">
+                <h2 style="color: red; text-align: center;">İYİ Kİ VARSIN! ❤️</h2>
+                <p style="text-align: center; color: #555;">Sen benim başıma gelen en güzel şeysin.</p>
+            </div>
+        """, unsafe_allow_index=True)
 
 # Alt Bilgi
-st.markdown("<br><br>", unsafe_allow_index=True)
-st.caption("2026 | Senin için, seninle birlikte kodlandı.")
+st.markdown("<br><hr><center>Senin için, sevgiyle tasarlandı. ✨</center>", unsafe_allow_index=True)
