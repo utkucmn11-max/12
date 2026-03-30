@@ -1,83 +1,88 @@
 import streamlit as st
+from streamlit_extras.let_it_rain import rain
 
 # 1. AYARLAR (En üstte durmalı)
 st.set_page_config(
-    page_title="Bizim Sayfamız",
+    page_title="Sadece Bizim İçin",
     page_icon="❤️",
     layout="centered"
 )
 
-# 2. CSS - TAM ORTALAMA VE GÖRSEL DÜZENLEME
+# 2. CSS - GÖRSEL DÜZENLEME VE ORTALAMA
 st.markdown("""
     <style>
     /* Arka Plan */
     .stApp {
-        background-color: #fffafa;
+        background-color: #fffafb;
     }
 
-    /* Tüm içeriği kapsayan ana merkezleyici */
-    .main-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
+    /* Ana Başlık */
+    .stTitle h1 {
+        color: #ff4b4b !important;
+        text-align: center !important;
+        font-family: 'Georgia', serif;
+        font-size: 3rem !important;
     }
 
-    /* Yazı kartı stili */
-    .info-card {
+    /* Kart Tasarımı */
+    .love-card {
         background: white;
         padding: 30px;
         border-radius: 20px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        box-shadow: 0 10px 30px rgba(255, 75, 75, 0.1);
         border: 1px solid #ffe4e6;
-        margin: 20px 0;
-        width: 100%;
+        text-align: center;
+        margin-bottom: 30px;
     }
 
-    h1 {
-        color: #ff4b4b !important;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Butonun Tam Ortalanması */
+    div.stButton {
+        display: flex;
+        justify-content: center;
     }
 
-    /* Butonun rengi ve şekli */
     .stButton button {
         background-color: #ff4b4b !important;
         color: white !important;
         border-radius: 50px !important;
-        padding: 0.5rem 2rem !important;
+        padding: 15px 40px !important;
+        font-size: 1.2rem !important;
         border: none !important;
+        transition: 0.3s;
+    }
+    
+    .stButton button:hover {
+        transform: scale(1.1);
     }
     </style>
     """, unsafe_allow_html=True)
 
-# 3. İÇERİK YAPISI
-with st.container():
-    st.markdown('<div class="main-wrapper">', unsafe_allow_html=True)
-    
-    st.title("İyi Ki Varsın ❤️")
-    
-    st.markdown("""
-        <div class="info-card">
-            <p style="font-size: 1.2rem; color: #444;">
-                "Seni sevmek, hayatın bana sunduğu en güzel hediye. 
-                Bu küçük sayfa, sana olan duygularımın dijital bir yansıması olsun istedim."
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
+# 3. İÇERİK
+st.title("İyi Ki Varsın ❤️")
 
-    # 4. SÜTUNLARLA BUTON ORTALAMA (Hatasız Yöntem)
-    # [1, 1, 1] yaparak butonu tam ortadaki sütuna hapsediyoruz
-    col1, col2, col3 = st.columns([1, 1, 1])
-    
-    with col2:
-        if st.button("Kalplerimi Gönder ✨"):
-            st.heart() # Balonlar uçar
-            st.heart()     # Kalp niyetine romantik kar efekti
-            st.toast("Seni Seviyorum!")
+st.markdown("""
+    <div class="love-card">
+        <p style="font-size: 1.3rem; color: #444;">
+            "Seni sevmek, hayatın bana sunduğu en güzel hediye. 
+            Bu küçük sayfa, sana olan duygularımın dijital bir yansıması..."
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+# 4. KALP YAĞMURU FONKSİYONU
+def kalpleri_yagdir():
+    rain(
+        emoji="❤️",
+        font_size=54,
+        falling_speed=4,
+        animation_length="5s", # 5 saniye boyunca yağar
+    )
+
+# 5. TAM ORTALANMIŞ BUTON
+# Sütun hatasını önlemek için doğrudan CSS ile ortaladık
+if st.button("Sana Olan Sevgimi Gör ✨"):
+    kalpleri_yagdir()
+    st.toast("Kalplerim sana ulaştı! ❤️")
 
 # Alt Bilgi
-st.write("---")
-st.caption("2026 | Senin için sevgiyle hazırlandı.")
+st.markdown("<br><br><hr><p style='text-align: center; color: #999;'>2026 | Senin için sevgiyle kodlandı.</p>", unsafe_allow_html=True)
