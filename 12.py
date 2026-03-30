@@ -1,23 +1,22 @@
 import streamlit as st
-import time
 
-# 1. AYARLAR (Hata almamak için EN ÜSTTE)
+# 1. AYARLAR (En üstte durmalı)
 st.set_page_config(
-    page_title="Canım Sude'm İçin",
+    page_title="Bizim Sayfamız",
     page_icon="❤️",
     layout="centered"
 )
 
-# 2. CSS - SÜTUNLARI VE İÇERİĞİ TAM ORTALAMA
+# 2. CSS - TAM ORTALAMA VE GÖRSEL DÜZENLEME
 st.markdown("""
     <style>
     /* Arka Plan */
     .stApp {
-        background: linear-gradient(135deg, #fff5f5 0%, #fed7e2 100%);
+        background-color: #fffafa;
     }
 
-    /* Ana Konteyner Ortalama */
-    .main-container {
+    /* Tüm içeriği kapsayan ana merkezleyici */
+    .main-wrapper {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -25,66 +24,60 @@ st.markdown("""
         text-align: center;
     }
 
-    /* Kart Tasarımı */
-    .love-card {
+    /* Yazı kartı stili */
+    .info-card {
         background: white;
         padding: 30px;
         border-radius: 20px;
-        box-shadow: 0 10px 25px rgba(216, 27, 96, 0.1);
-        border: 1px solid #fbb6ce;
-        max-width: 500px;
-        margin: 20px auto;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        border: 1px solid #ffe4e6;
+        margin: 20px 0;
+        width: 100%;
     }
 
     h1 {
-        color: #d81b60 !important;
-        font-family: 'Georgia', serif;
+        color: #ff4b4b !important;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    /* Butonun tam ortalanması için */
+    /* Butonun rengi ve şekli */
     .stButton button {
-        background-color: #d81b60 !important;
+        background-color: #ff4b4b !important;
         color: white !important;
-        border-radius: 25px !important;
-        padding: 10px 30px !important;
+        border-radius: 50px !important;
+        padding: 0.5rem 2rem !important;
         border: none !important;
-        transition: 0.3s;
-    }
-    
-    .stButton button:hover {
-        transform: scale(1.05);
-        box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
     }
     </style>
     """, unsafe_allow_html=True)
 
-# 3. İÇERİK (Sütun hatasını önlemek için div içine aldık)
-st.markdown('<div class="main-container">', unsafe_allow_html=True)
+# 3. İÇERİK YAPISI
+with st.container():
+    st.markdown('<div class="main-wrapper">', unsafe_allow_html=True)
+    
+    st.title("İyi Ki Varsın ❤️")
+    
+    st.markdown("""
+        <div class="info-card">
+            <p style="font-size: 1.2rem; color: #444;">
+                "Seni sevmek, hayatın bana sunduğu en güzel hediye. 
+                Bu küçük sayfa, sana olan duygularımın dijital bir yansıması olsun istedim."
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
 
-st.title("Canım Sude'm İçin ❤️")
+    # 4. SÜTUNLARLA BUTON ORTALAMA (Hatasız Yöntem)
+    # [1, 1, 1] yaparak butonu tam ortadaki sütuna hapsediyoruz
+    col1, col2, col3 = st.columns([1, 1, 1])
+    
+    with col2:
+        if st.button("Kalplerimi Gönder ✨"):
+            st.balloons() # Balonlar uçar
+            st.snow()     # Kalp niyetine romantik kar efekti
+            st.toast("Seni Seviyorum!")
 
-st.markdown("""
-    <div class="love-card">
-        <p style="font-size: 1.1rem; color: #4a5568;">
-            "Sıradan bir günün, seninle tanışınca nasıl bir mucizeye dönüştüğüne şahit oldum. 
-            Bu site, bizim küçük dünyamızın kalbi olsun istedim."
-        </p>
-        <p style="font-weight: bold; color: #d81b60;">İyi ki varsın, iyi ki benimlesin...</p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
 
-# 4. BUTON VE KALP EFEKTİ (Hatasız Ortalama)
-# Sütunları yan yana getirmek yerine, tek bir container içinde ortalıyoruz
-col1, col2, col3 = st.columns([1, 2, 1]) # Ortadaki sütun butonu tutar
-
-with col2:
-    if st.button("Kalplerimi Gönder ✨"):
-        st.balloons() # Balonlar uçar
-        st.snow() # Kalp niyetine kar taneleri (romantik bir efekt sağlar)
-        st.toast("Seni Seviyorum! ❤️")
-
-st.markdown('</div>', unsafe_allow_html=True)
-
-# 5. ALT BİLGİ
-st.write("###")
-st.markdown("<p style='text-align: center; color: #a0aec0; font-size: 0.8rem;'>Senin için sevgiyle kodlandı. | 2026</p>", unsafe_allow_html=True)
+# Alt Bilgi
+st.write("---")
+st.caption("2026 | Senin için sevgiyle hazırlandı.")
