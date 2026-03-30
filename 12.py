@@ -72,8 +72,8 @@ with st.container():
     
     with col2:
         if st.button("Kalplerimi Gönder ✨"):
-            st.balloons() # Balonlar uçar
-            st.snow()     # Kalp niyetine romantik kar efekti
+            st.heart() # Balonlar uçar
+            st.heart()     # Kalp niyetine romantik kar efekti
             st.toast("Seni Seviyorum!")
 
     st.markdown('</div>', unsafe_allow_html=True)
