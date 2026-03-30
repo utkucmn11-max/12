@@ -1,65 +1,47 @@
-
 import streamlit as st
 
-# 1. Sayfa Ayarları (Hata almamak için en üstte)
+# 1. Sayfa konfigürasyonu (Mutlaka en üstte olmalı)
 st.set_page_config(
     page_title="Sadece Senin İçin",
-    page_icon="🤍",
+    page_icon="❤️",
     layout="centered"
 )
 
-# 2. Minimalist Stil (CSS)
+# 2. CSS Düzenlemesi (Hatalı kısım düzeltildi)
 st.markdown("""
     <style>
-    /* Arka planı tamamen sade ve temiz yapalım */
+    .main {
+        background-color: #fff5f5;
+    }
     .stApp {
-        background-color: #ffffff;
+        background-image: linear-gradient(135deg, #feb2b2 0%, #feb2b2 100%);
     }
-    
-    /* Yazı fontu ve yerleşimi */
-    .mektup-metni {
-        font-family: 'Times New Roman', serif;
-        color: #2c3e50;
-        line-height: 2;
+    .love-card {
+        background-color: white;
+        padding: 20px;
+        border-radius: 15px;
         text-align: center;
-        padding: 50px 20px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
-
-    .vurgu {
-        color: #e63946;
-        font-weight: bold;
-        font-style: italic;
+    h1 {
+        color: #e53e3e !important;
+        text-align: center;
     }
-
-    /* Gereksiz Streamlit elementlerini gizle (Opsiyonel - Daha temiz görünüm) */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
     </style>
-    """, unsafe_allow_index=True)
+    """, unsafe_allow_html=True) # Parametreyi unsafe_allow_html olarak düzelttik
 
-# 3. İçerik (Mektup Kısmı)
-st.markdown(f"""
-    <div class="mektup-metni">
-        <h1 style="font-weight: 200; font-size: 2.5rem; margin-bottom: 50px;">
-            İyi ki Varsın...
-        </h1>
-        
-        <p>Bazen kelimelerin yetmediği anlar olur, sadece susup hissetmek istersin.</p>
-        
-        <p>Seninle geçen her dakika, hayatımın en <span class="vurgu">huzurlu</span> hikayesi gibi.</p>
-        
-        <p>Gülüşün, en karanlık günlerimde bile yolumu aydınlatan tek ışık.</p>
-        
-        <p>Bu hayatta verdiğim en doğru kararsın.</p>
-        
-        <p style="margin-top: 50px; font-size: 0.9rem; letter-spacing: 2px;">
-            HER ZAMAN SENİNLE.
-        </p>
-        
-        <div style="font-size: 2rem; margin-top: 30px;">🤍</div>
-    </div>
-    """, unsafe_allow_index=True)
+# 3. İçerik Alanı
+st.markdown('<div class="love-card">', unsafe_allow_html=True)
+st.title("İyi Ki Varsın ❤️")
+st.write("Senin için küçük bir dijital sürpriz hazırlamak istedim.")
+st.markdown('</div>', unsafe_allow_html=True)
 
-# 4. Küçük bir efekt (Sayfa yüklendiğinde hafifçe kar yağışı)
-st.snow()
+st.write("") # Boşluk
+
+if st.button("Seni ne kadar sevdiğimi gör! ✨"):
+    st.balloons()
+    st.success("Sonsuza kadar! ❤️")
+
+# Sayfa altına küçük bir not
+st.markdown("---")
+st.caption("2026 | Senin için sevgiyle kodlandı.")
